@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import sampleData from '../data/data.json';
+//import sampleData from '../data/data.json';
 
 export default function SearchPage() {
     const [searchTerm, setSearchTerm] = useState('');
