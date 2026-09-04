@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Header({ appName = "Medicine Finder", countryTag = "SL" }) {
+export default function Header({ appName = "Medicine.js Finder", countryTag = "SL" }) {
     return (
         <header className="app-header">
             <div className="header-container">
