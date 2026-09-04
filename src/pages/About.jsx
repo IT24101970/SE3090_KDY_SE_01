@@ -180,9 +180,7 @@ export default function About() {
                             <li style={{ fontSize: '14px', lineHeight: '1.6', color: '#475569' }}>
                                 • <a href="mailto:support@medicinefinder.lk" style={{ color: '#0284c7', fontWeight: '600', textDecoration: 'underline' }}>Email Assistance</a>: Write to support@medicinefinder.lk for inventory queries.
                             </li>
-                            <li style={{ fontSize: '14px', lineHeight: '1.6', color: '#475569' }}>
-                                • <strong style={{ color: '#0f172a' }}>Hackathon Meta:</strong> Developed for the <strong>SE3090 Software Engineering Frameworks Mini Hackathon</strong>. Built with React, Vite, and responsive CSS variables.
-                            </li>
+
                         </ul>
                     </div>
 
