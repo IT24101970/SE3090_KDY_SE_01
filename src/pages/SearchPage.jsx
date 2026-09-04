@@ -2,11 +2,16 @@ import React, { useState, useMemo } from 'react';
 import sampleData from '../data/data.json';
 
 export default function SearchPage() {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [selectedCity, setSelectedCity] = useState('All');
+    // Form input state
+    const [searchTermInput, setSearchTermInput] = useState('');
+    const [selectedCityInput, setSelectedCityInput] = useState('All');
+
+    // Applied search query state
+    const [appliedSearchTerm, setAppliedSearchTerm] = useState('');
+    const [appliedCity, setAppliedCity] = useState('All');
     const [hasSearched, setHasSearched] = useState(false);
 
-    // Relational data strictly matching Pharmacy, Medicine, and Inventory Mongoose models
+    // data matching Pharmacy, Medicine, and Inventory Mongoose models
     const pharmacies = sampleData.pharmacies || [];
     const medicines = sampleData.medicines || [];
     const inventories = sampleData.inventories || [];
@@ -18,36 +23,26 @@ export default function SearchPage() {
     }, [pharmacies]);
 
     // Relational join execution across Medicine, Inventory, and Pharmacy models
-    const searchResults = useMemo(() => {
-        if (!searchTerm.trim() && selectedCity === 'All' && !hasSearched) {
-            // Initial view: show all pharmacies with their available inventories
-            return pharmacies.map(pharmacy => {
-                const pharmacyInvs = inventories.filter(inv => inv.pharmacy === pharmacy._id && inv.quantity > 0);
-                const availableMeds = pharmacyInvs.map(inv => {
-                    const med = medicines.find(m => m._id === inv.medicine);
-                    return med ? { ...med, quantity: inv.quantity } : null;
-                }).filter(Boolean);
 
-                return {
-                    ...pharmacy,
-                    availableMedicines: availableMeds
-                };
-            }).filter(p => p.availableMedicines.length > 0);
+    const searchResults = useMemo(() => {
+        if (!hasSearched) {
+            // Initial view before clicking search
+            return [];
         }
 
-        // 1. Find matching medicines by search term
+        // Find matching medicines by applied search term
         const matchingMeds = medicines.filter(m =>
-            m.name.toLowerCase().includes(searchTerm.toLowerCase().trim()) ||
-            m.strength.toLowerCase().includes(searchTerm.toLowerCase().trim())
+            m.name.toLowerCase().includes(appliedSearchTerm.toLowerCase().trim()) ||
+            m.strength.toLowerCase().includes(appliedSearchTerm.toLowerCase().trim())
         );
         const matchingMedIds = new Set(matchingMeds.map(m => m._id));
 
-        // 2. Find matching inventories with quantity > 0
+        // Find matching inventories with quantity > 0
         const matchingInvs = inventories.filter(inv =>
             matchingMedIds.has(inv.medicine) && inv.quantity > 0
         );
 
-        // 3. Map inventories to Pharmacies and filter by City
+        //  Map inventories to Pharmacies and filter by applied City
         const resultMap = {};
 
         matchingInvs.forEach(inv => {
@@ -55,7 +50,7 @@ export default function SearchPage() {
             const medicine = medicines.find(m => m._id === inv.medicine);
 
             if (pharmacy && medicine) {
-                const matchesCity = selectedCity === 'All' || pharmacy.city.toLowerCase() === selectedCity.toLowerCase();
+                const matchesCity = appliedCity === 'All' || pharmacy.city.toLowerCase() === appliedCity.toLowerCase();
                 if (matchesCity) {
                     if (!resultMap[pharmacy._id]) {
                         resultMap[pharmacy._id] = {
@@ -73,16 +68,20 @@ export default function SearchPage() {
         });
 
         return Object.values(resultMap);
-    }, [searchTerm, selectedCity, hasSearched, pharmacies, medicines, inventories]);
+    }, [appliedSearchTerm, appliedCity, hasSearched, pharmacies, medicines, inventories]);
 
     const handleSearchSubmit = (e) => {
         e.preventDefault();
+        setAppliedSearchTerm(searchTermInput);
+        setAppliedCity(selectedCityInput);
         setHasSearched(true);
     };
 
     const handleClearFilters = () => {
-        setSearchTerm('');
-        setSelectedCity('All');
+        setSearchTermInput('');
+        setSelectedCityInput('All');
+        setAppliedSearchTerm('');
+        setAppliedCity('All');
         setHasSearched(false);
     };
 
@@ -106,11 +105,8 @@ export default function SearchPage() {
                             id="medicine-search-input"
                             type="text"
                             placeholder="e.g. Paracetamol, Amoxicillin..."
-                            value={searchTerm}
-                            onChange={(e) => {
-                                setSearchTerm(e.target.value);
-                                setHasSearched(true);
-                            }}
+                            value={searchTermInput}
+                            onChange={(e) => setSearchTermInput(e.target.value)}
                             className="search-input"
                         />
                     </div>
@@ -121,11 +117,8 @@ export default function SearchPage() {
                         </label>
                         <select
                             id="city-select-input"
-                            value={selectedCity}
-                            onChange={(e) => {
-                                setSelectedCity(e.target.value);
-                                setHasSearched(true);
-                            }}
+                            value={selectedCityInput}
+                            onChange={(e) => setSelectedCityInput(e.target.value)}
                             className="search-input"
                         >
                             {cities.map(city => (
@@ -140,7 +133,7 @@ export default function SearchPage() {
                         <button type="submit" className="btn-primary" style={{ height: '46px' }}>
                             Search Stock
                         </button>
-                        {(searchTerm || selectedCity !== 'All') && (
+                        {(searchTermInput || selectedCityInput !== 'All' || hasSearched) && (
                             <button
                                 type="button"
                                 onClick={handleClearFilters}
@@ -156,33 +149,36 @@ export default function SearchPage() {
 
             {/* Results Header & Grid */}
             <div style={{ marginTop: '2rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--slate-900)' }}>
-                        Pharmacies with Available Stock ({searchResults.length})
-                    </h3>
-                    {(searchTerm || selectedCity !== 'All') && (
+                {hasSearched && (
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--slate-900)' }}>
+                            Pharmacies with Available Stock ({searchResults.length})
+                        </h3>
                         <span style={{ fontSize: '0.875rem', color: 'var(--slate-500)' }}>
-                            Filtered by: {searchTerm ? `"${searchTerm}"` : 'All medicines'} {selectedCity !== 'All' ? `in ${selectedCity}` : ''}
+                            Filtered by: {appliedSearchTerm ? `"${appliedSearchTerm}"` : 'All medicines'} {appliedCity !== 'All' ? `in ${appliedCity}` : ''}
                         </span>
-                    )}
-                </div>
+                    </div>
+                )}
 
-                {searchResults.length === 0 ? (
+                {!hasSearched ? (
+                    <div className="about-card" style={{ textAlign: 'center', padding: '3rem 1.5rem', backgroundColor: '#ffffff' }}>
+                        <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>🔍</div>
+                        <h4 style={{ fontSize: '1.125rem', fontWeight: 600, color: 'var(--slate-800)', marginBottom: '0.5rem' }}>
+                            Search Pharmacy Medicine Stock
+                        </h4>
+                        <p style={{ color: 'var(--slate-500)', fontSize: '0.875rem', maxWidth: '480px', margin: '0 auto' }}>
+                            Enter a medicine name (e.g. <em>Paracetamol</em>, <em>Amoxicillin</em>) or select a city above and click <strong>Search Stock</strong> to find available pharmacies.
+                        </p>
+                    </div>
+                ) : searchResults.length === 0 ? (
                     <div className="about-card" style={{ textAlign: 'center', padding: '3rem 1.5rem', backgroundColor: '#ffffff' }}>
                         <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>💊</div>
                         <h4 style={{ fontSize: '1.125rem', fontWeight: 600, color: 'var(--slate-800)', marginBottom: '0.5rem' }}>
                             No matching pharmacies found
                         </h4>
                         <p style={{ color: 'var(--slate-500)', fontSize: '0.875rem', maxWidth: '450px', margin: '0 auto' }}>
-                            We couldn't find any pharmacy in <strong>{selectedCity === 'All' ? 'any city' : selectedCity}</strong> currently stocking <strong>"{searchTerm}"</strong>. Try checking spelling or selecting another city.
+                            We couldn't find any pharmacy in <strong>{appliedCity === 'All' ? 'any city' : appliedCity}</strong> currently stocking <strong>"{appliedSearchTerm}"</strong>. Try checking spelling or selecting another city.
                         </p>
-                        <button
-                            onClick={handleClearFilters}
-                            className="btn-primary"
-                            style={{ marginTop: '1.25rem', fontSize: '0.875rem' }}
-                        >
-                            Show All Available Stock
-                        </button>
                     </div>
                 ) : (
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.25rem' }}>
@@ -255,3 +251,4 @@ export default function SearchPage() {
         </div>
     );
 }
+
