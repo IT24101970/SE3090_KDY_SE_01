@@ -389,6 +389,131 @@ body {
   width: 55%;
 }
 
+/* Pharmacy Search Results Styling */
+.pharmacy-result-card {
+  background-color: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--slate-200);
+  box-shadow: var(--shadow-sm);
+  padding: 1.25rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pharmacy-result-card:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-200);
+}
+
+.pharmacy-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .pharmacy-card-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+.pharmacy-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--slate-900);
+}
+
+.pharmacy-city-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary-800);
+  background-color: var(--primary-100);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+}
+
+.pharmacy-address {
+  font-size: 0.875rem;
+  color: var(--slate-600);
+  margin-top: 0.25rem;
+}
+
+.pharmacy-meta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  background-color: var(--slate-50);
+  padding: 0.625rem 0.875rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--slate-200);
+}
+
+.pharmacy-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+}
+
+.medicine-inventory-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .medicine-inventory-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .medicine-inventory-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.medicine-item-card {
+  background-color: var(--slate-50);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.medicine-name {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--slate-900);
+}
+
+.medicine-strength {
+  font-size: 0.75rem;
+  color: var(--slate-500);
+}
+
+.stock-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+}
+
+.stock-badge.in-stock {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.stock-badge.low-stock {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
 /* ==========================================================================
    Pharmacy Dashboard & Inventory Table Styles
    ========================================================================== */
