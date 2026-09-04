@@ -31,11 +31,10 @@ export default function App() {
                         {/* Search page */}
                         <Route path="/search" element={<SearchPage />} />
 
-                        <Route path ="/about" element={<About />} />
-                        <Route
-                            path="/pharmacy/:pharmacyId"
-                            element={<PharmacyDashboard />}
-                        />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/pharmacy" element={<PharmacyDashboard />} />
+                        <Route path="/pharmacy-dashboard" element={<PharmacyDashboard />} />
+                        <Route path="/pharmacy/:pharmacyId" element={<PharmacyDashboard />} />
 
                     </Routes>
                 </main>

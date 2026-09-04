@@ -18,6 +18,7 @@ export default function Header({ appName = "Medicine.js Finder", countryTag = "S
                 {/* Navigation Links */}
                 <nav className="app-nav">
                     <a href="/search" className="nav-link">Search</a>
+                    <a href="/pharmacy-dashboard" className="nav-link">Dashboard</a>
                     <a href="/about" className="nav-link">About</a>
                 </nav>
             </div>
