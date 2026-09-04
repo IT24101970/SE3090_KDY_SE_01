@@ -14,8 +14,7 @@ export default function Header({ appName = "Medicine Finder", countryTag = "SL" 
 
                 {/* Navigation Links */}
                 <nav className="app-nav">
-                    <a href="#search" className="nav-link">Search</a>
-                    <a href="#about" className="nav-link">About Issue</a>
+                    <a href="/about" className="nav-link">About</a>
                 </nav>
             </div>
         </header>
