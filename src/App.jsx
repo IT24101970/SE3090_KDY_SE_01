@@ -6,6 +6,7 @@ import SearchPage from './pages/SearchPage';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
+import About from "./pages/About.jsx";
 
 export default function App() {
     return (
@@ -20,6 +21,8 @@ export default function App() {
 
                         {/* Search page */}
                         <Route path="/search" element={<SearchPage />} />
+
+                        <Route path ="/about" element={<About />} />
                     </Routes>
                 </main>
 
