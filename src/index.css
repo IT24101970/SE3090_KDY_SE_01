@@ -384,3 +384,7 @@ body {
   font-size: 0.7rem;
   color: var(--slate-500);
 }
+
+.search-button{
+  width: 55%;
+}

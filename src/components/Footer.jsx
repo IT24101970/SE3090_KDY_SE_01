@@ -12,25 +12,25 @@ export default function Footer() {
                 <div className="footer-brand">
                     <span>💊</span>
                     <span className="brand-title-sm">
-            Medicine Finder <span className="badge-country">SL</span>
-          </span>
+                        Medicine Finder <span className="badge-country">SL</span>
+                    </span>
                     <span className="footer-divider">•</span>
                     <span className="footer-tagline">Connecting Sri Lankan patients with active pharmacy stock.</span>
                 </div>
 
                 {/* Action Buttons & Copyright */}
                 <div className="footer-actions">
-                    <button className="btn-secondary-xs" onClick={handleContactClick}>
-                        📞 Contact Support
-                    </button>
-                    <a href="#about" className="btn-secondary-xs">
-                        ℹ️ About Issue
+                    {/*<button className="btn-secondary-xs" onClick={handleContactClick}>*/}
+                    {/*    📞 Contact Support*/}
+                    {/*</button>*/}
+                    <a href="/about" className="btn-secondary-xs">
+                        ℹ️ About
                     </a>
                 </div>
             </div>
 
             <div className="footer-compact-bottom">
-                <p>© 2026 Medicine Finder SL | Built for SE3090 Mini Hackathon</p>
+                <p>© 2026 Medicine Finder SL</p>
             </div>
         </footer>
     );
