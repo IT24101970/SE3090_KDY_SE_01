@@ -9,4 +9,4 @@ const pharmacySchema = new mongoose.Schema({
     openHours: { type: String, required: true },
 }, { timestamps: true });
 
-export default mongoose.model('Pharmacy', pharmacySchema);
+export default mongoose.models.Pharmacy || mongoose.model('Pharmacy', pharmacySchema);

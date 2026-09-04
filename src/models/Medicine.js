@@ -6,4 +6,4 @@ const medicineSchema = new mongoose.Schema({
     strength: { type: String, required: true },
 }, { timestamps: true });
 
-export default mongoose.model('Medicine', medicineSchema);
+export default mongoose.models.Medicine || mongoose.model('Medicine', medicineSchema);

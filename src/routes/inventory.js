@@ -83,7 +83,7 @@ router.put('/:inventoryId', async (req, res) => {
         const updatedItem = await Inventory.findByIdAndUpdate(
             req.params.inventoryId,
             { quantity: req.body.quantity },
-            { new: true, runValidators: true }
+            { returnDocument: 'after', runValidators: true }
         ).populate('medicineId');
 
         if (!updatedItem) {
