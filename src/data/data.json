@@ -1,1 +1,162 @@
-{}
+{
+  "pharmacies": [
+    {
+      "_id": "pharm_1",
+      "name": "HealthPlus Pharmacy",
+      "address": "123 Galle Road, Bambalapitiya",
+      "city": "Colombo",
+      "contact": "+94 11 258 9630",
+      "openHours": "8:00 AM - 10:00 PM"
+    },
+    {
+      "_id": "pharm_2",
+      "name": "Lanka Care Pharmacy",
+      "address": "45 Peradeniya Road",
+      "city": "Kandy",
+      "contact": "+94 81 223 4567",
+      "openHours": "7:30 AM - 9:30 PM"
+    },
+    {
+      "_id": "pharm_3",
+      "name": "MediQuick Pharmacy & Wellness",
+      "address": "88 Main Street",
+      "city": "Galle",
+      "contact": "+94 91 432 1890",
+      "openHours": "24 Hours"
+    },
+    {
+      "_id": "pharm_4",
+      "name": "City Pharma Colombo",
+      "address": "12 Union Place, Slave Island",
+      "city": "Colombo",
+      "contact": "+94 11 471 2300",
+      "openHours": "8:30 AM - 11:00 PM"
+    },
+    {
+      "_id": "pharm_5",
+      "name": "Central Pharmacy Kandy",
+      "address": "10 Dalada Veediya",
+      "city": "Kandy",
+      "contact": "+94 81 494 5500",
+      "openHours": "8:00 AM - 9:00 PM"
+    }
+  ],
+  "medicines": [
+    {
+      "_id": "med_1",
+      "name": "Paracetamol",
+      "price": 12.50,
+      "strength": "500mg"
+    },
+    {
+      "_id": "med_2",
+      "name": "Amoxicillin",
+      "price": 45.00,
+      "strength": "250mg"
+    },
+    {
+      "_id": "med_3",
+      "name": "Omeprazole",
+      "price": 30.00,
+      "strength": "20mg"
+    },
+    {
+      "_id": "med_4",
+      "name": "Cetirizine",
+      "price": 15.00,
+      "strength": "10mg"
+    },
+    {
+      "_id": "med_5",
+      "name": "Metformin",
+      "price": 25.00,
+      "strength": "500mg"
+    },
+    {
+      "_id": "med_6",
+      "name": "Ibuprofen",
+      "price": 18.00,
+      "strength": "400mg"
+    }
+  ],
+  "inventories": [
+    {
+      "_id": "inv_1",
+      "pharmacy": "pharm_1",
+      "medicine": "med_1",
+      "quantity": 150
+    },
+    {
+      "_id": "inv_2",
+      "pharmacy": "pharm_1",
+      "medicine": "med_2",
+      "quantity": 30
+    },
+    {
+      "_id": "inv_3",
+      "pharmacy": "pharm_1",
+      "medicine": "med_3",
+      "quantity": 8
+    },
+    {
+      "_id": "inv_4",
+      "pharmacy": "pharm_2",
+      "medicine": "med_1",
+      "quantity": 200
+    },
+    {
+      "_id": "inv_5",
+      "pharmacy": "pharm_2",
+      "medicine": "med_4",
+      "quantity": 50
+    },
+    {
+      "_id": "inv_6",
+      "pharmacy": "pharm_3",
+      "medicine": "med_1",
+      "quantity": 90
+    },
+    {
+      "_id": "inv_7",
+      "pharmacy": "pharm_3",
+      "medicine": "med_2",
+      "quantity": 15
+    },
+    {
+      "_id": "inv_8",
+      "pharmacy": "pharm_3",
+      "medicine": "med_5",
+      "quantity": 100
+    },
+    {
+      "_id": "inv_9",
+      "pharmacy": "pharm_4",
+      "medicine": "med_2",
+      "quantity": 60
+    },
+    {
+      "_id": "inv_10",
+      "pharmacy": "pharm_4",
+      "medicine": "med_3",
+      "quantity": 45
+    },
+    {
+      "_id": "inv_11",
+      "pharmacy": "pharm_4",
+      "medicine": "med_6",
+      "quantity": 5
+    },
+    {
+      "_id": "inv_12",
+      "pharmacy": "pharm_5",
+      "medicine": "med_5",
+      "quantity": 75
+    },
+    {
+      "_id": "inv_13",
+      "pharmacy": "pharm_5",
+      "medicine": "med_6",
+      "quantity": 40
+    }
+  ]
+}
