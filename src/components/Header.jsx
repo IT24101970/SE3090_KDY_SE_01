@@ -7,7 +7,7 @@ export default function Header({ appName = "Medicine Finder", countryTag = "SL" 
                 {/* Brand Logo & Title */}
                 <div className="brand-logo">
                     <span style={{ fontSize: '1.5rem' }}>💊</span>
-                    <a href="/about" className="nav-link">
+                    <a href="/home" className="nav-link">
                         <span className="brand-title">
                             Medicine Finder<span className="badge-country">SL</span>
                         </span>

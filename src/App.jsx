@@ -18,6 +18,7 @@ export default function App() {
                     <Routes>
                         {/* Default/Home page */}
                         <Route path="/" element={<Home />} />
+                        <Route path="/home" element={<Home />} />
 
                         {/* Search page */}
                         <Route path="/search" element={<SearchPage />} />
