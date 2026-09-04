@@ -209,6 +209,7 @@ export default function PharmacyDashboard() {
                             <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem' }}>
                                 <button type="submit" className="btn-primary" style={{ flex: 1 }}>
                                     Save Stock
+                                    {/* nksaloa */}
                                 </button>
                                 <button
                                     type="button"
