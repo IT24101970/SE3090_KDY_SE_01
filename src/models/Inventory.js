@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 
 const inventorySchema = new mongoose.Schema({
-    pharmacy: {
+    pharmacyId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Pharmacy',
         required: true
     },
-    medicine: {
+    medicineId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Medicine',
         required: true

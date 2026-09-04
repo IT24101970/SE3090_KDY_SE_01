@@ -16,6 +16,9 @@ export default function App() {
 
                 <main className="main-content">
                     <Routes>
+
+                        <Route path = "*" element={<h1>404 Not Found</h1>} />
+                        
                         {/* Default/Home page */}
                         <Route path="/" element={<Home />} />
                         <Route path="/home" element={<Home />} />
@@ -24,6 +27,7 @@ export default function App() {
                         <Route path="/search" element={<SearchPage />} />
 
                         <Route path ="/about" element={<About />} />
+
                     </Routes>
                 </main>
 
