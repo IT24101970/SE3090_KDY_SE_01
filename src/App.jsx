@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 //import Home from './pages/Home';
 import SearchPage from './pages/SearchPage';
-//import About from './pages/About';
+import About from './pages/About';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -14,6 +14,7 @@ export default function App() {
           <main className="main-content">
             <Routes>
                 <Route path="/search" element={<SearchPage />} />
+                <Route path="/about" element={<About />} />
               {/*
               <Route path="/" element={<Home />} />
               <Route path="/search" element={<SearchPage />} />
