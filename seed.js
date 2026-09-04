@@ -18,9 +18,17 @@ const seedDatabase = async () => {
         await Inventory.deleteMany({});
         await User.deleteMany({});
 
+        console.log('Inserting Users...');
+        const users = await User.insertMany([
+            { email: "admin@pharmacy.com", password: "adminpassword123", role: "admin" },
+            { email: "seller@healthplus.com", password: "sellerpassword123", role: "seller" }
+        ]);
+        const sellerUser = users[1];
+
         console.log('Inserting Pharmacies...');
         const pharmacies = await Pharmacy.insertMany([
             {
+                userId: sellerUser._id,
                 name: "HealthPlus Pharmacy",
                 address: "123 Galle Road, Bambalapitiya",
                 city: "Colombo",
@@ -28,6 +36,7 @@ const seedDatabase = async () => {
                 openHours: "8:00 AM - 10:00 PM"
             },
             {
+                userId: sellerUser._id,
                 name: "Lanka Care Pharmacy",
                 address: "45 Peradeniya Road",
                 city: "Kandy",
@@ -35,6 +44,7 @@ const seedDatabase = async () => {
                 openHours: "7:30 AM - 9:30 PM"
             },
             {
+                userId: sellerUser._id,
                 name: "MediQuick Pharmacy & Wellness",
                 address: "88 Main Street",
                 city: "Galle",
@@ -42,6 +52,7 @@ const seedDatabase = async () => {
                 openHours: "24 Hours"
             },
             {
+                userId: sellerUser._id,
                 name: "City Pharma Colombo",
                 address: "12 Union Place, Slave Island",
                 city: "Colombo",
@@ -60,25 +71,19 @@ const seedDatabase = async () => {
             { name: "Ibuprofen", price: 18.00, strength: "400mg" }
         ]);
 
-        console.log('Inserting Users...');
-        await User.insertMany([
-            { email: "admin@pharmacy.com", password: "adminpassword123", role: "admin" },
-            { email: "seller@healthplus.com", password: "sellerpassword123", role: "seller" }
-        ]);
-
         console.log('Inserting Inventory items...');
         await Inventory.insertMany([
-            { pharmacy: pharmacies[0]._id, medicine: medicines[0]._id, quantity: 150 },
-            { pharmacy: pharmacies[0]._id, medicine: medicines[1]._id, quantity: 30 },
-            { pharmacy: pharmacies[0]._id, medicine: medicines[2]._id, quantity: 8 },
-            { pharmacy: pharmacies[1]._id, medicine: medicines[0]._id, quantity: 200 },
-            { pharmacy: pharmacies[1]._id, medicine: medicines[3]._id, quantity: 50 },
-            { pharmacy: pharmacies[2]._id, medicine: medicines[0]._id, quantity: 90 },
-            { pharmacy: pharmacies[2]._id, medicine: medicines[1]._id, quantity: 15 },
-            { pharmacy: pharmacies[2]._id, medicine: medicines[4]._id, quantity: 100 },
-            { pharmacy: pharmacies[3]._id, medicine: medicines[1]._id, quantity: 60 },
-            { pharmacy: pharmacies[3]._id, medicine: medicines[2]._id, quantity: 45 },
-            { pharmacy: pharmacies[3]._id, medicine: medicines[5]._id, quantity: 5 }
+            { pharmacyId: pharmacies[0]._id, medicineId: medicines[0]._id, quantity: 150 },
+            { pharmacyId: pharmacies[0]._id, medicineId: medicines[1]._id, quantity: 30 },
+            { pharmacyId: pharmacies[0]._id, medicineId: medicines[2]._id, quantity: 8 },
+            { pharmacyId: pharmacies[1]._id, medicineId: medicines[0]._id, quantity: 200 },
+            { pharmacyId: pharmacies[1]._id, medicineId: medicines[3]._id, quantity: 50 },
+            { pharmacyId: pharmacies[2]._id, medicineId: medicines[0]._id, quantity: 90 },
+            { pharmacyId: pharmacies[2]._id, medicineId: medicines[1]._id, quantity: 15 },
+            { pharmacyId: pharmacies[2]._id, medicineId: medicines[4]._id, quantity: 100 },
+            { pharmacyId: pharmacies[3]._id, medicineId: medicines[1]._id, quantity: 60 },
+            { pharmacyId: pharmacies[3]._id, medicineId: medicines[2]._id, quantity: 45 },
+            { pharmacyId: pharmacies[3]._id, medicineId: medicines[5]._id, quantity: 5 }
         ]);
 
         console.log('✅ Database seeded successfully!');
